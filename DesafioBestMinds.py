@@ -19,19 +19,19 @@ import random
 def janela_sign_in(): #janela de Sign Up
     sg.theme('Reddit')
     layout = [
-        [sg.Image(r'C:\Desafio BestMinds\016-location (Custom).png'), sg.Text('Nome:')],
+        [sg.Image(r'C:\Program Files\Desafio BestMinds\011-user (Custom).png'), sg.Text('Nome:')],
         [sg.Input(key='usuario', size=(43,1))],
-        [sg.Image(r'C:\Desafio BestMinds\012-lock (Custom).png'), sg.Text('Senha:')],
+        [sg.Image(r'C:\Program Files\Desafio BestMinds\012-lock (Custom).png'), sg.Text('Senha:')],
         [sg.Input(key='senha', password_char='*', size=(43,1))],
-        [sg.Image(r'C:\Desafio BestMinds\replock (Custom) .png'), sg.Text('Confirmar Senha:')],
+        [sg.Image(r'C:\Program Files\Desafio BestMinds\replock (Custom) .png'), sg.Text('Confirmar Senha:')],
         [sg.Input(key='repsenha', password_char='*', size=(43,1))],
-        [sg.Image(r'C:\Desafio BestMinds\082-credit_card (Custom).png'), sg.Text('CPF:')],
+        [sg.Image(r'C:\Program Files\Desafio BestMinds\082-credit_card (Custom).png'), sg.Text('CPF:')],
         [sg.Input(key='cpf', size=(43, 1))],
-        [sg.Image(r'C:\Desafio BestMinds\016-location (Custom).png'), sg.Text('Endereço:')],
+        [sg.Image(r'C:\Program Files\Desafio BestMinds\016-location (Custom).png'), sg.Text('Endereço:')],
         [sg.Input(key='endereco', size=(43, 1))],
-        [sg.Image(r'C:\Desafio BestMinds\017-phone (Custom).png'), sg.Text('Telefone:')],
-        [sg.Input(key='telefone',size=(43, 1))],
-        [sg.Image(r'C:\Desafio BestMinds\013-mail (Custom).png'), sg.Text('E-mail:')],
+        [sg.Image(r'C:\Program Files\Desafio BestMinds\017-phone (Custom).png'), sg.Text('Telefone:')],
+        [sg.Input(key='telefone', size=(43, 1))],
+        [sg.Image(r'C:\Program Files\Desafio BestMinds\013-mail (Custom).png'), sg.Text('E-mail:')],
         [sg.Input(key='e_mail', size=(43, 1))],
         [sg.Text('')],
         [sg.Button('Cadastrar'), sg.ProgressBar(10000, orientation='h', size=(21,1), border_width=4, key='progresso', bar_color=("Green", "Grey"))]
@@ -43,8 +43,8 @@ def janela_sign_in(): #janela de Sign Up
 def janela_login(): #Janela de Sign In
     sg.theme('Reddit')
     layout = [
-        [sg.Image(r'C:\Desafio BestMinds\013-mail (Custom).png'), sg.Text('E-mail:'), sg.Input(key='email2', size=(21,1))],
-        [sg.Image(r'C:\Desafio BestMinds\012-lock (Custom).png'), sg.Text('Senha:'), sg.Input(key='senha', password_char='*', size=(21,1))],
+        [sg.Image(r'C:\Program Files\Desafio BestMinds\013-mail (Custom).png'), sg.Text('E-mail:'), sg.Input(key='email2', size=(21,1))],
+        [sg.Image(r'C:\Program Files\Desafio BestMinds\012-lock (Custom).png'), sg.Text('Senha:'), sg.Input(key='senha', password_char='*', size=(21,1))],
         [sg.Checkbox('Salvar o Login', key='salvar')],
         [sg.Button('Entrar')],
     ]
@@ -121,13 +121,13 @@ while True:
 
     if window == janela1 and botoes == 'Cadastrar':
 
-        usuario = (entrada['usuario'])
-        senha = (entrada['senha'])
-        r_senha = (entrada['repsenha'])
-        cpf = (entrada['cpf'])
-        end = (entrada['endereco'])
-        tel = (entrada['telefone'])
-        e_mail = (entrada['e_mail'])
+        usuario = entrada['usuario']
+        senha = entrada['senha']
+        r_senha = entrada['repsenha']
+        cpf = '{}.{}.{}-{}'.format(entrada['cpf'][:3], entrada['cpf'][3:6], entrada['cpf'][6:9], entrada['cpf'][9:])
+        end = entrada['endereco']
+        tel ='({}) {}-{}'.format(entrada['telefone'][:2], entrada['telefone'][2:7], entrada['telefone'][7:11])
+        e_mail = entrada['e_mail']
 
         if entrada['cpf'] == '' or entrada['endereco'] == '' or entrada['telefone'] == '' or entrada['e_mail'] == '': #validação campos vazios
             sg.popup('Preencha todos os campos.')
@@ -135,9 +135,10 @@ while True:
             sg.popup("As senhas não se coincidem")
         elif len(entrada['cpf']) != 11 or not entrada['cpf'].isdigit(): #validação do cpf
             sg.popup('Campo CPF: Formato errado. Tente de novo (apenas numeros)')
-        elif len(entrada['telefone']) <10 or len(entrada['telefone']) > 11 or not entrada['telefone'].isdigit(): #validação telefone
+        elif len(entrada['telefone']) != 11 or not entrada['telefone'].isdigit(): #validação telefone
             sg.popup('Campo Telefone: Formato errado. Tente de novo (apenas numeros)')
         elif not solve(entrada['e_mail']): #validação email
+            sg.popup('E-mail invalido')
             sg.popup('E-mail invalido')
 
 
