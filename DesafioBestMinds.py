@@ -1,8 +1,15 @@
 
 import PySimpleGUI as sg
-import smtplib
+import smtplib #S M T P - Simple Mail Transfer Protocol
 import email.message
 import re
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
+
+
+#DESAFIO
 
 #empresa Oliveira Trade e foi solicitado pelo board da empresa que seja desenvolvido uma
 # forma de Sign in e Sign up de usuários.
@@ -48,40 +55,45 @@ def janela_home():
 janela1, janela2, janela3, janela4 = janela_sign_in(), None, None, None
 
 
+
+
+
+
 def enviar_email():
     corpo_email = f"""
-    Olá, {usuario} seu cadastro foi efetuado com sucesso!!! 
-    Usuario: {usuario}
-    Senha: {senha}  
-    CPF: {cpf} 
-    Endereço: {end}
-    Email: {e_mail}
-    Telefone: {tel} 
+    <p>Olá, <b>{usuario}</b> seu cadastro foi efetuado com sucesso!!! </p>
+    <p><b>🙍 Usuario:</b> {usuario} </p>
+    <p><b>🔐 Senha:</b> {senha} </p> 
+    <p><b>💳 CPF:</b> {cpf} </p>
+    <p><b>📬 Endereço:</b> {end} </p>
+    <p><b>📧 Email:<b> {e_mail} </p>
+    <p><b>☎ Telefone:</b> {tel} </p>
     
-    Atenciosamente,
+    <p>Atenciosamente,</p>
     
-    Equipe,
+   <p>Equipe,</p>
     
-    Oliveira Trade
+    <p>Oliveira Trade</p>
+    <img src=""/>
     
     
     """
 
 
-    msg = email.message.Message()
+    msg = MIMEMultipart()
     msg['Subject'] = "Desafio BestMInds - EveryMInd"  # assunto do email.
     msg['From'] = 'testdesafio@gmail.com'    #seu email - email criado - testdesafio@gmail.com
 
     msg['To'] = f'{e_mail}'  #email destino #email que vai ser pego no input.
     password = 'pjsocmauivixnmoh' #Senha123
-    msg.add_header('Content - Type', 'text/html')
-    msg.set_payload(corpo_email )
+    msg.attach(MIMEText(corpo_email, 'html'))
 
     s = smtplib.SMTP('smtp.gmail.com: 587')
     s.starttls() #Criar um grau de segurança
     # Login credentials for sending the mail
     s.login(msg['From'], password)
     s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
+    s.quit()
 
 
 def solve(s):
@@ -89,7 +101,6 @@ def solve(s):
    if re.match(pat,s):
       return True
    return False
-
 
 
 while True:
@@ -124,7 +135,9 @@ while True:
 
 
         else:
+            sg.popup('Aguarde alguns instantes.....!')
             enviar_email()
+            sg.popup('Enviamos um e-mail com seus dados para sua caixa de entrada.')
             sg.popup('Cadastro Efetuado com Sucesso!')
             janela1.hide()
             janela2 = janela_login()
