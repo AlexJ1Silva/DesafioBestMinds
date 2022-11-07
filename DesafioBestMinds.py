@@ -19,19 +19,19 @@ import random
 def janela_sign_in(): #janela de Sign Up
     sg.theme('Reddit')
     layout = [
-        [sg.Image(r'C:\Users\ajs2m\Documents\MeusProjetos\DesafioBestMinds\ico\011-user (Custom).png'), sg.Text('Nome:')],
+        [sg.Image(r'C:\Desafio BestMinds\016-location (Custom).png'), sg.Text('Nome:')],
         [sg.Input(key='usuario', size=(43,1))],
-        [sg.Image(r'C:\Users\ajs2m\Documents\MeusProjetos\DesafioBestMinds\ico\012-lock (Custom).png'), sg.Text('Senha:')],
+        [sg.Image(r'C:\Desafio BestMinds\012-lock (Custom).png'), sg.Text('Senha:')],
         [sg.Input(key='senha', password_char='*', size=(43,1))],
-        [sg.Image(r'C:\Users\ajs2m\Documents\MeusProjetos\DesafioBestMinds\ico\replock (Custom) .png'), sg.Text('Confirmar Senha:')],
+        [sg.Image(r'C:\Desafio BestMinds\replock (Custom) .png'), sg.Text('Confirmar Senha:')],
         [sg.Input(key='repsenha', password_char='*', size=(43,1))],
-        [sg.Image(r'C:\Users\ajs2m\Documents\MeusProjetos\DesafioBestMinds\ico\082-credit_card (Custom).png'), sg.Text('CPF:')],
+        [sg.Image(r'C:\Desafio BestMinds\082-credit_card (Custom).png'), sg.Text('CPF:')],
         [sg.Input(key='cpf', size=(43, 1))],
-        [sg.Image(r'C:\Users\ajs2m\Documents\MeusProjetos\DesafioBestMinds\ico\016-location (Custom).png'), sg.Text('Endereço:')],
+        [sg.Image(r'C:\Desafio BestMinds\016-location (Custom).png'), sg.Text('Endereço:')],
         [sg.Input(key='endereco', size=(43, 1))],
-        [sg.Image(r'C:\Users\ajs2m\Documents\MeusProjetos\DesafioBestMinds\ico\017-phone (Custom).png'), sg.Text('Telefone:')],
+        [sg.Image(r'C:\Desafio BestMinds\017-phone (Custom).png'), sg.Text('Telefone:')],
         [sg.Input(key='telefone',size=(43, 1))],
-        [sg.Image(r'C:\Users\ajs2m\Documents\MeusProjetos\DesafioBestMinds\ico\013-mail (Custom).png'), sg.Text('E-mail:')],
+        [sg.Image(r'C:\Desafio BestMinds\013-mail (Custom).png'), sg.Text('E-mail:')],
         [sg.Input(key='e_mail', size=(43, 1))],
         [sg.Text('')],
         [sg.Button('Cadastrar'), sg.ProgressBar(10000, orientation='h', size=(21,1), border_width=4, key='progresso', bar_color=("Green", "Grey"))]
@@ -43,8 +43,8 @@ def janela_sign_in(): #janela de Sign Up
 def janela_login(): #Janela de Sign In
     sg.theme('Reddit')
     layout = [
-        [sg.Text('E-mail:'), sg.Input(key='email2', size=(21,1))],
-        [sg.Text('Senha:'), sg.Input(key='senha', password_char='*', size=(21,1))],
+        [sg.Image(r'C:\Desafio BestMinds\013-mail (Custom).png'), sg.Text('E-mail:'), sg.Input(key='email2', size=(21,1))],
+        [sg.Image(r'C:\Desafio BestMinds\012-lock (Custom).png'), sg.Text('Senha:'), sg.Input(key='senha', password_char='*', size=(21,1))],
         [sg.Checkbox('Salvar o Login', key='salvar')],
         [sg.Button('Entrar')],
     ]
