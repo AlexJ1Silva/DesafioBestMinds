@@ -74,7 +74,7 @@ def enviar_email():
    <p>Equipe,</p>
     
     <p>Oliveira Trade</p>
-    <img src=""/>
+    <img src="https://raw.githubusercontent.com/AlexJ1Silva/DesafioBestMinds/main/Assinatura/assinatura.PNG"/>
     
     
     """
