@@ -7,7 +7,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
-
+import random
 
 #DESAFIO
 
@@ -19,14 +19,22 @@ from email import encoders
 def janela_sign_in(): #janela de Sign Up
     sg.theme('Reddit')
     layout = [
-        [sg.Text('Usuario:'), sg.Input(key='usuario', size=(21,1))],
-        [sg.Text('Senha:'), sg.Input(key='senha', password_char='*', size=(21,1))],
-        [sg.Text('Confirmar Senha'), sg.Input(key='repsenha', password_char='*', size=(21,1))],
-        [sg.Text('Informe seu CPF'), sg.Input(key='cpf', size=(21, 1))],
-        [sg.Text('Informe seu Endereço'),sg.Input(key='endereco', size=(21, 1))],
-        [sg.Text('Informe seu telefone'), sg.Input(key='telefone',size=(21, 1))],
-        [sg.Text('E-mail'), sg.Input(key='e_mail', size=(21, 1))],
-        [sg.Button('Cadastrar')]
+        [sg.Image(r'C:\Users\ajs2m\Documents\MeusProjetos\DesafioBestMinds\ico\011-user (Custom).png'), sg.Text('Nome:')],
+        [sg.Input(key='usuario', size=(43,1))],
+        [sg.Image(r'C:\Users\ajs2m\Documents\MeusProjetos\DesafioBestMinds\ico\012-lock (Custom).png'), sg.Text('Senha:')],
+        [sg.Input(key='senha', password_char='*', size=(43,1))],
+        [sg.Image(r'C:\Users\ajs2m\Documents\MeusProjetos\DesafioBestMinds\ico\replock (Custom) .png'), sg.Text('Confirmar Senha:')],
+        [sg.Input(key='repsenha', password_char='*', size=(43,1))],
+        [sg.Image(r'C:\Users\ajs2m\Documents\MeusProjetos\DesafioBestMinds\ico\082-credit_card (Custom).png'), sg.Text('CPF:')],
+        [sg.Input(key='cpf', size=(43, 1))],
+        [sg.Image(r'C:\Users\ajs2m\Documents\MeusProjetos\DesafioBestMinds\ico\016-location (Custom).png'), sg.Text('Endereço:')],
+        [sg.Input(key='endereco', size=(43, 1))],
+        [sg.Image(r'C:\Users\ajs2m\Documents\MeusProjetos\DesafioBestMinds\ico\017-phone (Custom).png'), sg.Text('Telefone:')],
+        [sg.Input(key='telefone',size=(43, 1))],
+        [sg.Image(r'C:\Users\ajs2m\Documents\MeusProjetos\DesafioBestMinds\ico\013-mail (Custom).png'), sg.Text('E-mail:')],
+        [sg.Input(key='e_mail', size=(43, 1))],
+        [sg.Text('')],
+        [sg.Button('Cadastrar'), sg.ProgressBar(10000, orientation='h', size=(21,1), border_width=4, key='progresso', bar_color=("Green", "Grey"))]
 
     ]
 
@@ -35,7 +43,7 @@ def janela_sign_in(): #janela de Sign Up
 def janela_login(): #Janela de Sign In
     sg.theme('Reddit')
     layout = [
-        [sg.Text('E-mail:'), sg.Input(key='email2', size=(20,1))],
+        [sg.Text('E-mail:'), sg.Input(key='email2', size=(21,1))],
         [sg.Text('Senha:'), sg.Input(key='senha', password_char='*', size=(21,1))],
         [sg.Checkbox('Salvar o Login', key='salvar')],
         [sg.Button('Entrar')],
@@ -74,7 +82,7 @@ def enviar_email():
    <p>Equipe,</p>
     
     <p>Oliveira Trade</p>
-    <img src="https://raw.githubusercontent.com/AlexJ1Silva/DesafioBestMinds/main/Assinatura/assinatura%20(Small).PNG"/>
+    <img src="https://raw.githubusercontent.com/AlexJ1Silva/DesafioBestMinds/main/Assinatura/assinatura%20(Custom).PNG"/>
     
     
     """
@@ -135,8 +143,10 @@ while True:
 
 
         else:
-            sg.popup('Aguarde alguns instantes.....!')
+            sg.popup('Aguarde alguns instantes.....')
             enviar_email()
+            for i in range(10000):
+                window['progresso'].update(i + 1)
             sg.popup('Enviamos um e-mail com seus dados para sua caixa de entrada.')
             sg.popup('Cadastro Efetuado com Sucesso!')
             janela1.hide()
