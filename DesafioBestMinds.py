@@ -46,7 +46,7 @@ def janela_login(): #Janela de Sign In
         [sg.Image(r'C:\Program Files\Desafio BestMinds\013-mail (Custom).png'), sg.Text('E-mail:'), sg.Input(key='email2', size=(21,1))],
         [sg.Image(r'C:\Program Files\Desafio BestMinds\012-lock (Custom).png'), sg.Text('Senha:'), sg.Input(key='senha', password_char='*', size=(21,1))],
         [sg.Checkbox('Salvar o Login', key='salvar')],
-        [sg.Button('Entrar')],
+        [sg.Button('Entrar'), sg.Text('                     ') ,sg.Button('Novo Usuario', key='cadastrar2')],
     ]
     return sg.Window('Login', layout=layout, finalize=True)
 
@@ -60,10 +60,11 @@ def janela_home():
     return sg.Window('Sucesso', layout=layout, finalize=True)
 
 
-janela1, janela2, janela3, janela4 = janela_sign_in(), None, None, None
+janela1, janela2, janela3, janela4 = janela_login(), None, None, None
 
 
-
+e_mail = ''
+senha = ''
 
 
 
@@ -113,13 +114,35 @@ def solve(s):
 
 while True:
 
-
-
     window, botoes, entrada = sg.read_all_windows()
+
     if window == janela1 and botoes == sg.WIN_CLOSED:
         break
 
-    if window == janela1 and botoes == 'Cadastrar':
+    if window == janela1 and botoes == 'cadastrar2':
+        janela1.hide()
+        janela2 = janela_sign_in()
+
+    if window == janela1 and botoes == 'Entrar':
+
+        if entrada['email2'] == '' or entrada['senha'] == '':
+            sg.popup('Preencha todos os campos.')
+
+        elif not solve(entrada['email2']): #validação email
+            sg.popup('E-mail invalido')
+
+        elif entrada['email2'] == e_mail and entrada['senha'] == senha:
+            sg.popup('Login Efetuado com Sucesso!')
+            janela3 = janela_home()
+            janela1.hide()
+        else:
+
+            sg.popup('Login ou Senha Incorretos Tente Novamente ou cadastre-se!')
+
+    if window == janela2 and botoes == sg.WIN_CLOSED:
+        break
+
+    if window == janela2 and botoes == 'Cadastrar':
 
         usuario = entrada['usuario']
         senha = entrada['senha']
@@ -139,8 +162,6 @@ while True:
             sg.popup('Campo Telefone: Formato errado. Tente de novo (apenas numeros)')
         elif not solve(entrada['e_mail']): #validação email
             sg.popup('E-mail invalido')
-            sg.popup('E-mail invalido')
-
 
 
         else:
@@ -150,26 +171,8 @@ while True:
                 window['progresso'].update(i + 1)
             sg.popup('Enviamos um e-mail com seus dados para sua caixa de entrada.')
             sg.popup('Cadastro Efetuado com Sucesso!')
-            janela1.hide()
-            janela2 = janela_login()
-
-
-
-
-
-    if window == janela2 and botoes == sg.WIN_CLOSED:
-        break
-
-    if window == janela2 and botoes == 'Entrar':
-
-        if entrada['email2'] == e_mail and entrada['senha'] == senha:
-            sg.popup('Login Efetuado com Sucesso!')
-
-            janela3 = janela_home()
             janela2.hide()
-        else:
-
-            sg.popup('Login ou Senha Incorretos Tente Novamente!')
+            janela1 = janela_login()
 
     if window == janela3 and botoes == sg.WIN_CLOSED:
         break
